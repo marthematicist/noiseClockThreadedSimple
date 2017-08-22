@@ -66,6 +66,7 @@ float borderWidth;
 int millisOffset; 
 
 void setup() {
+  //frameRate(25);
   size( 800 , 480 );
   halfWidth = width/2;
   halfHeight = height/2;

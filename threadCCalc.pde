@@ -38,7 +38,7 @@ void threadCCalc0() {
       for( int b = 0 ; b < numBands ; b++ ) {
         if( fldVal >= (bandStart[b]-bandWidth[b]) && fldVal <= (bandEnd[b]+bandWidth[b]) ) {
           if( fldVal >= bandStart[b] && fldVal <= bandEnd[b] ) {
-            c = hsbColor( hueVal , satVal , briVal );
+            c = hsbColor( (hueVal+b*60)%360 , satVal , briVal );
           } else {
             c = outlineColor;
           }
@@ -88,7 +88,7 @@ void threadCCalc1() {
       for( int b = 0 ; b < numBands ; b++ ) {
         if( fldVal >= (bandStart[b]-bandWidth[b]) && fldVal <= (bandEnd[b]+bandWidth[b]) ) {
           if( fldVal >= bandStart[b] && fldVal <= bandEnd[b] ) {
-            c = hsbColor( hueVal , satVal , briVal );
+            c = hsbColor( (hueVal+b*60)%360 , satVal , briVal );
           } else {
             c = outlineColor;
           }

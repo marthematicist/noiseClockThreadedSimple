@@ -1,13 +1,14 @@
 // fld calc thread
 
-float fDetail = 0.008;
-float fSpeed = 0.02;
+float fDetail = 0.010;
+float fSpeed = 0.010;
 float hDetail = 0.002;
-float hSpeed = 0.01;
+float hSpeed = 0.005;
 float sDetail = 0.029;
-float sSpeed = 0.2;
+float sSpeed = 0.05;
 float bDetail = 0.049;
-float bSpeed = 0.3;
+float bSpeed = 0.05;
+float masterSpeed = 0.4;
 
 void threadFCalc() {
   int num = PA.num;
@@ -94,10 +95,10 @@ void threadFCalc() {
       
       
       n = 0;
-      tf += fSpeed;
-      th += hSpeed;
-      tb += bSpeed;
-      ts += sSpeed;
+      tf += fSpeed*masterSpeed;
+      th += hSpeed*masterSpeed;
+      tb += bSpeed*masterSpeed;
+      ts += sSpeed*masterSpeed;
     }
     
     
