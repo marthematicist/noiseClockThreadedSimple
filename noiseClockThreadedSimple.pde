@@ -214,6 +214,47 @@ void draw() {
   colFlg_thread_doneRendering1 = false;
   if( logOut ) { println( "frame: " , frameCount , "  time: " , millis() , "  RENDERDONE1" ); }
   
+  
+  noStroke();
+  fill(outlineColor);
+  int t = millis() + millisOffset;
+  float sPart = float(t)/(60000)%1;
+  float mPart = float(t)/(3600000)%1;
+  float hPart = float(t)/(43200000)%1;
+  float sAng = (-0.25+sPart)*TWO_PI;
+  float mAng = (-0.25+mPart)*TWO_PI;
+  float hAng = (-0.25+hPart)*TWO_PI;
+
+  strokeWeight(2*borderWidth);
+  stroke(outlineColor);
+  noFill();
+  ellipse( 0.5*width , 0.5*height , 2*outerRadius-borderWidth , 2*outerRadius-borderWidth );
+  ellipse( 0.5*width , 0.5*height , 2*innerRadius , 2*innerRadius );
+  line( 0.12*width , 0.5*borderWidth , 0.88*width , 0.5*borderWidth );
+  line( 0.12*width , height-0.5*borderWidth , 0.88*width , height-0.5*borderWidth );
+  stroke(outlineColor);
+  fill(bgColor);
+  strokeWeight( borderWidth );
+  pushMatrix();
+  translate( halfWidth , halfHeight );
+  // hour
+  pushMatrix();
+  rotate( hAng );
+  rect( -hRadBack , -0.5*hWidthFront , hRadBack+hRadFront , hWidthFront , cr , cr , cr , cr );
+  popMatrix();
+  // minute
+  pushMatrix();
+  rotate( mAng );
+  rect( -mRadBack , -0.5*mWidthFront , mRadBack+mRadFront , mWidthFront , cr , cr , cr , cr );
+  popMatrix();
+  // second
+  pushMatrix();
+  rotate( sAng );
+  //rect( -sRadBack , -0.5*sWidthFront , sRadBack+sRadFront , sWidthFront );
+  popMatrix();
+  popMatrix();
+  
+  
   colFlg_draw_goUpdate0 = true;
   while( !colFlag_thread_Updating0 ) {}
   colFlag_thread_Updating0 = false;
@@ -256,53 +297,7 @@ void draw() {
   
   
   
-  noStroke();
-  fill(outlineColor);
   
-  int t = millis() + millisOffset;
-  float sPart = float(t)/(60000)%1;
-  float mPart = float(t)/(3600000)%1;
-  float hPart = float(t)/(43200000)%1;
-  float sAng = (-0.25+sPart)*TWO_PI;
-  float mAng = (-0.25+mPart)*TWO_PI;
-  float hAng = (-0.25+hPart)*TWO_PI;
-  
-  
-  
-  
-  strokeWeight(2*borderWidth);
-  stroke(outlineColor);
-  noFill();
-  ellipse( 0.5*width , 0.5*height , 2*outerRadius-borderWidth , 2*outerRadius-borderWidth );
-  ellipse( 0.5*width , 0.5*height , 2*innerRadius , 2*innerRadius );
-  
-    
-  
-  stroke(outlineColor);
-  fill(bgColor);
-  strokeWeight( borderWidth );
-  pushMatrix();
-  translate( halfWidth , halfHeight );
-  
-  // hour
-  pushMatrix();
-  rotate( hAng );
-  rect( -hRadBack , -0.5*hWidthFront , hRadBack+hRadFront , hWidthFront , cr , cr , cr , cr );
-  popMatrix();
-  
-  // minute
-  pushMatrix();
-  rotate( mAng );
-  rect( -mRadBack , -0.5*mWidthFront , mRadBack+mRadFront , mWidthFront , cr , cr , cr , cr );
-  popMatrix();
-  
-  // second
-  pushMatrix();
-  rotate( sAng );
-  //rect( -sRadBack , -0.5*sWidthFront , sRadBack+sRadFront , sWidthFront );
-  popMatrix();
-  
-  popMatrix();
   
   
 }
