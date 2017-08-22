@@ -58,6 +58,7 @@ float sRadFront;
 float sRadBack;
 float sWidthFront;
 float sWidthBack;
+float cr;
 
 
 
@@ -76,20 +77,21 @@ void setup() {
   
   
   outerRadius = 0.5*width - 10;
-  innerRadius = 0.45*height;
+  innerRadius = 0.30*height;
   borderWidth = 2;
-  hRadFront = 0.50*innerRadius;
+  hRadFront = 0.60*innerRadius;
   hRadBack = 0.10*innerRadius;
-  hWidthFront = 0.04*innerRadius;
+  hWidthFront = 0.08*innerRadius;
   hWidthBack = 0.10*innerRadius;
-  mRadFront = 0.64*innerRadius;
+  mRadFront = 0.85*innerRadius;
   mRadBack = 0.14*innerRadius;
-  mWidthFront = 0.04*innerRadius;
+  mWidthFront = 0.06*innerRadius;
   mWidthBack = 0.08*innerRadius;
   sRadFront = 0.80*innerRadius;
   sRadBack = 0.16*innerRadius;
   sWidthFront = 0.02*innerRadius;
   sWidthBack = 0.04*innerRadius;
+  cr = 0.02*innerRadius;
 
 
   
@@ -163,6 +165,8 @@ void setup() {
 
 boolean logOut = false;
 void draw() {
+  background(bgColor);
+  
   if( logOut ) { println( "frame: " , frameCount , "  time: " , millis() , "  FRAMESTART" ); }
   
   // request fld progress
@@ -263,59 +267,41 @@ void draw() {
   float hAng = (-0.25+hPart)*TWO_PI;
   
   
+  
+  
   strokeWeight(2*borderWidth);
-  stroke(bgColor);
-  noFill();
-  ellipse( 0.5*width , 0.5*height , 2*outerRadius , 2*outerRadius );
-  fill(0 , 0 , 0 ,32 );
-  ellipse( 0.5*width , 0.5*height , 2*innerRadius-borderWidth , 2*innerRadius-borderWidth );
   stroke(outlineColor);
   noFill();
   ellipse( 0.5*width , 0.5*height , 2*outerRadius-borderWidth , 2*outerRadius-borderWidth );
   ellipse( 0.5*width , 0.5*height , 2*innerRadius , 2*innerRadius );
   
-  
+    
   
   stroke(outlineColor);
   fill(bgColor);
   strokeWeight( borderWidth );
-  strokeJoin(MITER);
   pushMatrix();
   translate( halfWidth , halfHeight );
   
   // hour
   pushMatrix();
   rotate( hAng );
-  beginShape();
-  vertex( hRadFront , -0.5*hWidthFront );
-  vertex( hRadFront , 0.5*hWidthFront );
-  vertex( -hRadBack , 0.5*hWidthBack );
-  vertex( -hRadBack , -0.5*hWidthBack );
-  endShape(CLOSE);
+  rect( -hRadBack , -0.5*hWidthFront , hRadBack+hRadFront , hWidthFront , cr , cr , cr , cr );
   popMatrix();
   
   // minute
   pushMatrix();
   rotate( mAng );
-  beginShape();
-  vertex( mRadFront , -0.5*mWidthFront );
-  vertex( mRadFront , 0.5*mWidthFront );
-  vertex( -mRadBack , 0.5*mWidthBack );
-  vertex( -mRadBack , -0.5*mWidthBack );
-  endShape(CLOSE);
+  rect( -mRadBack , -0.5*mWidthFront , mRadBack+mRadFront , mWidthFront , cr , cr , cr , cr );
   popMatrix();
   
   // second
   pushMatrix();
   rotate( sAng );
-  beginShape();
-  vertex( sRadFront , -0.5*sWidthFront );
-  vertex( sRadFront , 0.5*sWidthFront );
-  vertex( -sRadBack , 0.5*sWidthBack );
-  vertex( -sRadBack , -0.5*sWidthBack );
-  endShape(CLOSE);
+  //rect( -sRadBack , -0.5*sWidthFront , sRadBack+sRadFront , sWidthFront );
   popMatrix();
   
   popMatrix();
+  
   
 }
